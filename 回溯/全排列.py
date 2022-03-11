@@ -8,10 +8,12 @@ class Solution:
         def dfs(p, s, r):
             if s == len(nums):
                 r.append(p)
+                print(p)
                 return
             for i in range(len(nums)):
                 if nums[i] in p:
                     continue
+                print(p)
                 dfs(p + [nums[i]], s + 1, r)
 
         size = len(nums)
@@ -20,9 +22,9 @@ class Solution:
         p = []
         res = []
         dfs(p, 0, res)
-        print(len(res))
+        # print(res)
         return res
-nums = [1, 2, 3,4]
+nums = [1, 2, 3]
 a = Solution()
 a.permute(nums)
 
