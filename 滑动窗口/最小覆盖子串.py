@@ -25,93 +25,66 @@
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 from collections import Counter
 
+
 # 解题步骤
 # 双指针l ,r ， r 每次往右走，判断当前s[l:r]中是否包含子串，如果不包含就继续往右边走、
 # 如果当前l 至 r  s[l:r] 中包含，那么就移动左边的指针l += 1, 然后在判断是否包含子串。
 class Solution:
+    def check(self, t_frequency, c_frequency):
+        flag = True
+        for k, v in t_frequency.items():
+            if c_frequency[k] < t_frequency[k]:
+                flag = False
+
+        # for alpha in t:
+        #     # 如果不存在，标记一下False
+        #     if alpha not in word_string:
+        #         flag = False
+        #     else:
+        #         if s[l:r].count(alpha) < t_frequency[alpha]:
+        #             flag = False
+        return flag
+
     def minWindow(self, s: str, t: str):
         if s is None or t is None:
             return ""
         if len(t) > len(s):
             return ""
         t_frequency = Counter(t)
+        min_len = len(s) * 100
+        result = ""
         l = 0
         r = 1
         n = len(s)
-        while r < n:
+        while r <= n:
+            # print(l,r)
             word_string = s[l:r]
-            # 如果子串 不在 s[l : r] ， r += 1
-            # if t not in word_string:
-            flag = True
-            for alpha in t:
-                if alpha not in word_string:
-                    r += 1
-                    flag = False
-            if flag:
-                break
+            c_frequency = Counter(s[l:r])
 
-            print(s[l:r])
-            l += 1
+            while self.check(t_frequency, c_frequency):
+                # print(word_string)
 
+                if len(word_string) < min_len:
+                    result = word_string
+                    min_len = len(word_string)
 
+                l += 1
+                while s[l:l + 1] not in t:
+                    l += 1
+                word_string = s[l:r]
+                c_frequency = Counter(s[l:r])
 
-
-        #         r += 1
-        #     while t in s[l:r]:
-        #         l += 1
-        #
-        #     c_frequency = Counter()
-        #
-        #     while k <= n:
-        #         w = s[j:k + 1]
-        #         if w in t:
-        #             # if c_frequency[w] > t_frequency[w]:
-        #             #     print(c_frequency, t_frequency, c_frequency[w], w, t_frequency[w])
-        #             #     break
-        #             c_frequency[w] += 1
-        #
-        #         q = []
-        #         for l in range(len(t_frequency)):
-        #             if c_frequency[w] < t_frequency[w]:
-        #                 q.append(False)
-        #             else:
-        #                 q.append(True)
-        #         if all(q):
-        #             print(q)
-        #             print(s[i:k + 1])
-        #             r.append(s[i: k + 1])
-        #             break
-        #         # if c_frequency == t_frequency:
-        #             # print(c_frequency, t_frequency)
-        #             # print(s[i:k+1])
-        #             # if k - i < len(r):
-        #             #     r = s[i:k + 1]
-        #             #     print(r)
-        #
-        #             # r.append(s[i: k + 1])
-        #             # break
-        #
-        #         j += 1
-        #         k += 1
-        #         # break
-        #
-        #     i += 1
-        # # print(22222222)
-        # print(r)
-        # m_i = 999999
-        # re = ""
-        # for k, v in enumerate(r):
-        #     if len(v) < m_i:
-        #         re = v
-        #         m_i = len(v)
-
-        # return re
-        # return map(lambda x:len(x), r)
-        # return min(len(r))
+            while s[r:r + 1] not in t and r < n:
+                r += 1
+            r += 1
+        if min_len > n:
+            return ""
+        else:
+            return result
 
 
 s = "aaaaaaaaaaaabbbbbcdd"
 t = "abcdd"
 s_s = Solution()
 f = s_s.minWindow(s, t)
-# print(f)
+print(f)
