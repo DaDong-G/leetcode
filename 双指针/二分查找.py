@@ -25,18 +25,21 @@ class Solution:
             else:
                 return -1
         left, right = 0, len(nums) - 1
-        while left < right:
-            mid = (left + right) // 2
+        while left <= right:
+            mid = (right + left) // 2
             if nums[mid] == target:
                 return mid
             if nums[mid] < target:
-                right = mid - 1
-            else:
                 left = mid + 1
+
+            if nums[mid] > target:
+                right = mid - 1
 
         return -1
 
+
+
 s = [2,5]
 d = Solution()
-f = d.search(s,5)
+f = d.search([5, 7, 7, 8, 10], 8)
 print(f)
