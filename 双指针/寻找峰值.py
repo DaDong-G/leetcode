@@ -24,9 +24,10 @@
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 
-# 每次判断，如果 mums[mid] 的值 大于左面，小于右边一定是峰值。
+# 每次判断
 # 如果nums[mid] > nums[mid + 1] 说明左边一定有峰值。
 # 如果nums[mid] > nums[mid - 1] 说明右边一定有峰值。
+# 需要注意的是，如果确定了一端存在峰值，就始终在一端进行搜寻。
 class Solution:
     def findPeakElement(self, nums):
         if len(nums) <= 3:
@@ -35,24 +36,40 @@ class Solution:
         right = len(nums) - 1
         n = len(nums) - 1
         mid = 0
-        while  left <= right and mid < n-1:
+        while left <= right:
             mid = (left + right) // 2
-            if nums[mid] > nums[mid + 1]:
-                right = mid
+
+            print(left, mid, right)
+            if mid != n:
+                if nums[mid] > nums[mid + 1] and nums[mid] > nums[mid - 1]:
+                    return mid
+
+                if nums[mid] < nums[mid + 1]:
+                    left = mid + 1
+                    continue
             else:
-                left = mid + 1
-        print(mid)
+                return mid
+            if mid != 0:
+                if nums[mid] > nums[mid + 1] and nums[mid] > nums[mid - 1]:
+                    return mid
+
+                if nums[mid] < nums[mid - 1]:
+                    right = mid - 1
+            else:
+                return mid
+
         return mid
+
 s = Solution()
-s.findPeakElement([1,2,3,4])
-def findPeakElement(self, nums: List[int]) -> int:
-    n = len(nums)
-    i, j = 0, n - 1
-    while i <= j:
-        mid = i + (j - i) // 2
-        if (mid == 0 or nums[mid] > nums[mid-1]) and (mid == n-1 or nums[mid] > nums[mid+1]):
-            return mid
-        if nums[mid] < nums[mid+1]:
-            i = mid + 1
-        else:
-            j = mid - 1
+s.findPeakElement([3,4,3,2,1])
+# def findPeakElement(self, nums: List[int]) -> int:
+#     n = len(nums)
+#     i, j = 0, n - 1
+#     while i <= j:
+#         mid = i + (j - i) // 2
+#         if (mid == 0 or nums[mid] > nums[mid-1]) and (mid == n-1 or nums[mid] > nums[mid+1]):
+#             return mid
+#         if nums[mid] < nums[mid+1]:
+#             i = mid + 1
+#         else:
+#             j = mid - 1
