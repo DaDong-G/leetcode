@@ -26,7 +26,7 @@ class Solution:
 
             if left.val != right.val:
                 return False
-            print(left.val,right.val)
+            print(left.val, right.val)
 
             dfs(left.left, right.right)
             dfs(left.right, right.left)

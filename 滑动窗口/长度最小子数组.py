@@ -44,24 +44,24 @@
 # 在原有基础进行优化， 使用一个total，来存取求得的和。
 class Solution:
     def minSubArrayLen(self, target: int, nums):
-        i, j = 0, 0
-        if nums is None:
-            return 0
-        if sum(nums) < target:
-            return 0
         n = len(nums)
-        total = 0
-        max_len = n + 1
+        i = 0
+        j = 0
+        t = 0
+        min_len = 99999
         while j < n:
-            total += nums[j]
-            while target <= total:
-                max_len = min(max_len, j - i + 1)
-                total -= nums[i]
+            t += nums[j]
+            while t >= target:
+                if min_len > j - i +1:
+                    min_len = j-i+1
+                t -= nums[i]
                 i += 1
+
             j += 1
-        return max_len
-
-
+        if min_len == 99999:
+            return 0
+        return min_len
+        # print(min_len)
 s = Solution()
-f = s.minSubArrayLen(target=7, nums=[2,3,1,2,4,3])
+f = s.minSubArrayLen(target=11, nums=[1,1,1,1,1,1,1,1])
 print(f)
