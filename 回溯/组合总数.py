@@ -4,33 +4,51 @@
 # candidates 中的 同一个 数字可以 无限制重复被选取 。如果至少一个数字的被选数量不同，则两种组合是不同的。 
 #
 # 对于给定的输入，保证和为 target 的不同组合数少于 150 个。
+# 示例 1：
+
+# 输入：candidates = [2,3,6,7], target = 7
+# 输出：[[2,2,3],[7]]
+# 解释：
+# 2 和 3 可以形成一组候选，2 + 2 + 3 = 7 。注意 2 可以使用多次。
+# 7 也是一个候选， 7 = 7 。
+# 仅有这两种组合。
+# 示例 2：
 #
+# 输入: candidates = [2,3,5], target = 8
+# 输出: [[2,2,2,2],[2,3,3],[3,5]]
+# 示例 3：
+#
+# 输入: candidates = [2], target = 1
+# 输出: []
+
+
 # 来源：力扣（LeetCode）
 # 链接：https://leetcode-cn.com/problems/combination-sum
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 class Solution:
     def combinationSum(self, candidates, target: int):
-        def dfs(t, p, start, res):
-            if t == 0:
-                p.sort()
-                if p not in res:
-                    res.append(p)
-                return
-            if t < 0:
-                return
-            for i in range(start, len(candidates)):
-                dfs(t - candidates[i], p + [candidates[i]], i, res)
-
-        path = []
         res = []
-        size = len(candidates)
-        if size == 0:
-            return []
-        dfs(target, path, 0, res)
-        print(res)
+        path = []
 
+        def dfs(p,start,t):
+            if t == target:
+                res.append(p)
+                print(res)
+                return
+
+            if t >target:
+                return
+            # print(p)
+            for i in range(start,len(candidates)):
+                if t > target:
+                    continue
+                t = t + candidates[i]
+                dfs(p + [candidates[i]],i,t)
+                t = t - candidates[i]
+
+        dfs(path,0,0)
+        return res
 
 c = Solution()
-c.combinationSum([1, 2, 2, 5, 1], 7)
+c.combinationSum([2, 3, 6, 7], 7)
 # 同一个path 如果出现了
-

@@ -31,33 +31,16 @@ isConnected = [[1,1,0],
                [0,0,1]]
 
 directs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-class Solution:
-    def findCircleNum(self, grid):
-
-        def dfs(grid, r, c):
-
-            for d in directs:
-                # 注意这里一定不能写成 r += d[0]
-
-                # print(i, j)
-                if 0 <= r + d[0] < len(grid) and len(grid[0]) > c + d[1] >= 0 and grid[r + d[0]][c + d[1]] == 1:
-                    # print(i, j)
-                    grid[r + d[0]][c + d[1]] = 0
-                    # print(grid)
-                    dfs(grid, r + d[0], c + d[1])
-
-        nr = len(grid)
-        if nr == 0:
-            return 0
-        m = len(grid)
-        n = len(grid[0])
-        island = 0
-        for i in range(m):
-            for j in range(n):
-                if grid[i][j] == 1:
-                    island += 1
-                    dfs(grid, i, j)
-        print(island)
-        return island
+class Solution(object):
+    def findCircleNum(self, isConnected):
+        """
+        :type isConnected: List[List[int]]
+        :rtype: int
+        """
 s = Solution()
 s.findCircleNum(isConnected)
+
+[[1,0,0,1],
+ [0,1,1,0],
+ [0,1,1,1],
+ [1,0,1,1]]

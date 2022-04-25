@@ -18,37 +18,54 @@
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 class Solution:
-    def combinationSum2(self, candidates, target ):
-        def dfs(p, r, t,used):
-            # print(t)
-            if t < 0:
-                return
-
-            if t == 0:
-                p.sort()
-                if p not in res:
-                    res.append(p)
-                # print(p)
-                return
-
-            for i in range(len(candidates)):
-                if used[i] != 1:
-                    if i > 0 and candidates[i] == candidates[i-1] and used[i-1] == 0 :
-                        continue
-                    used[i] = 1
-                    dfs(p + [candidates[i]], r, t - candidates[i], used)
-                    used[i] = 0
-
+    def combinationSum2(self, candidates, target):
         path = []
         res = []
+        n = len(candidates)
+        used = [0] * n
+        candidates.sort()
+        print(candidates)
 
-        use = [0 for _ in range(len(candidates))]
-        dfs(path, res, target,use)
-        return  res
 
+        def dfs(p, r, t, used, start):
+            if t == target :
+                r.append(p)
+                if p == [1, 2,5]:
+                    print(used,start,"............")
+                return
+
+            if t > target:
+                return
+
+            for i in range(start, n):
+                if used[i] == 1:
+                    continue
+                if i > 0 and candidates[i] == candidates[i- 1] and used[i - 1] == 0:
+                    continue
+
+                t += candidates[i]
+                used[i] = 1
+                dfs(p + [candidates[i]], res, t, used, i)
+                used[i] = 0
+                t -= candidates[i]
+
+        dfs(path, res, 0, used, 0)
+        return res
 
 candidates = ([1, 2, 2, 5])
-candidates.sort()
-target = 5
+# candidates.sort()
+# target = 5
 s = Solution()
-s.combinationSum2(candidates, target)
+s.combinationSum2([10,1,1,2,7,6,1,5], 8)
+
+#                                                            []
+#
+#
+#                used = [1,0,0,0]      used = [0,1,0,0]        used = [0,0,1,0]            used = [0,0,0,1]
+#                 1                      2                      2                            5
+#               /   \
+#              /     \
+#             /       \
+#   used = [1,0,0,0]  used = [1,1,0,0]
+#          1           2
+

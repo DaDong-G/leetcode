@@ -8,30 +8,30 @@
 # https://leetcode-cn.com/problems/subsets/
 # 输入：nums = [1, 2, 3]
 # 输出：[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
-class Solution:
+class Solution(object):
     def subsets(self, nums):
-        def dfs(p, r, s, start):
-            res.append(p)
-            if s == len(nums):
-                # print(p)
-                return
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
 
+        def dfs(start, p, s, r):
+            if s == size + 1:
+                return
+            r.append(p)
+            print(p)
             for i in range(start, len(nums)):
-                print(p)
                 if nums[i] in p:
                     continue
-                # p.append(nums[i])
-                dfs(p + [nums[i]], r, s + 1, i + 1)
-                # p.pop()
 
-            return r
+                dfs(i, p + [nums[i]], s + 1, res)
 
+        res = []
+        p = []
         if len(nums) == 0:
             return []
-        path = []
-        res = []
-        dfs(path, res, 0, 0)
-        print(res)
+        size = len(nums)
+        dfs(0, p, 0, res)
         return res
 
 

@@ -16,17 +16,12 @@ class Solution:
                 return
 
             for i in range(len(nums)):
-                # 如果没有使用过
                 if use[i] == 0:
                     if i > 0 and n[i] == n[i-1] and use[i-1] == 0:
-                        print(i)
                         continue
                     use[i] = 1
-                    p.append(n[i])
-                    # p + [n[i]]  就不需要进行进栈，出栈了。
-                    dfs(n, p, depth + 1, res, use)
+                    dfs(n, p + [n[i]], depth + 1, res, use)
                     use[i] = 0
-                    p.pop()
 
         size = len(nums)
         if size == 0:
@@ -37,7 +32,6 @@ class Solution:
         used = [0 for _ in range(len(nums))]
         nums.sort()
         dfs(nums, path, 0, res, used)
-        print(len(res))
         return res
 
 
