@@ -14,24 +14,40 @@
 #
 # 输入：nums = [2, 3, 2]
 # 输出：3
-# 解释：你不能先偷窃
-# 1
-# 号房屋（金额 = 2），然后偷窃
-# 3
-# 号房屋（金额 = 2）, 因为他们是相邻的。
+# 解释：你不能先偷窃1号房屋（金额 = 2），然后偷窃3号房屋（金额 = 2）, 因为他们是相邻的。
 # 示例
 # 2：
 #
 # 输入：nums = [1, 2, 3, 1]
 # 输出：4
-# 解释：你可以先偷窃
-# 1
-# 号房屋（金额 = 1），然后偷窃
-# 3
-# 号房屋（金额 = 3）。
-# 偷窃到的最高金额 = 1 + 3 = 4 。
+# 解释：你可以先偷窃1号房屋（金额 = 1），然后偷窃3号房屋（金额 = 3）。偷窃到的最高金额 = 1 + 3 = 4 。
 # 示例
 # 3：
 #
 # 输入：nums = [1, 2, 3]
 # 输出：3
+# 这道题和打家劫舍1 几乎一样，只是针对不同的数组
+class Solution:
+    def rob(self, nums):
+        if len(nums) <= 2:
+            return max(nums)
+        return max(self.max_rob(nums[:-1]), self.max_rob(nums[1:]))
+
+    def max_rob(self, nums):
+
+        n = len(nums)
+        if n <= 2:
+            return max(nums[0], nums[1])
+
+        dp = [0] * n
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+
+        for i in range(2, n):
+            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])
+        return dp[-1]
+
+
+s = Solution()
+d = s.rob([200,3,140,20,10])
+print(d)
