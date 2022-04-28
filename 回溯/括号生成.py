@@ -15,6 +15,9 @@
 # 链接：https://leetcode-cn.com/problems/generate-parentheses
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+# 先把所有的括号可能种类 列出来，然后再减枝操作即可。
+
+
 class Solution:
     def generateParenthesis(self, n: int):
         def dfs(temp, left, right,result):
@@ -23,9 +26,6 @@ class Solution:
                 result.append(temp)
                 # print(path)
                 return
-            # if left >= n:
-            # print(left)
-            # return
 
             if right > left:
                 return

@@ -38,28 +38,57 @@
 # 链接：https://leetcode-cn.com/problems/decode-ways
 # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+# class Solution:
+#     def numDecodings(self, s: str):
+#         n = len(s)
+#         dp = [0] * n
+#         if s[0] != "0":
+#             dp[0] = 1
+#         else:
+#             dp[0] = 0
+#
+#         for i in range(1, n):
+#             if s[i] > "6":
+#                 dp[i] = dp[i - 1]
+#                 continue
+#
+#             if s[i] == "0":
+#                 if i > 1:
+#                     dp[i] = dp[i - 1] - 1
+#                 else:
+#                     dp[i] = dp[i - 1]
+#
+#             if "0" < s[i] <= "6":
+#
+#                 if "0" < s[i - 1] <= "2":
+#                     if "0" < s[i - 2] <= "2":
+#                         dp[i] = dp[i-1] + dp[i - 2]
+#                     else:
+#                         dp[i] = dp[i - 1] + 1
+#
+#                 else:
+#
+#                     dp[i] = dp[i - 1]
+#         print(dp)
+#         return dp[-1]
+
+
+
+# print(d)
+
 class Solution:
-    def numDecodings(self, s: str):
-
-        j = 0
-        i = 0
+    def numDecodings(self, s: str) -> int:
         n = len(s)
-        res = 0
-        while j < n and i < n:
-            if i == j:
-                if s[j] != "0":
-                    res += 1
-                    j += 1
-                # continue
-                else:
-                    j += 1
-                    i += 1
-
-            elif "0" < str(s[i]) + str(s[j]) <= "26":
-                res += 1
-                i += 1
-            else:
-                i += 1
-        print(res)
+        f = [1] + [0] * n
+        for i in range(1, n + 1):
+            if s[i - 1] != '0':
+                f[i] += f[i - 1]
+            if i > 1 and s[i - 2] != '0' and int(s[i-2:i]) <= 26:
+                f[i] += f[i - 2]
+        print(f)
+        return f[n]
 s = Solution()
-s.numDecodings("216")
+d = s.numDecodings("1234")
+# "1123"
+# f = [1] + [0] * 4
+# print(f)
