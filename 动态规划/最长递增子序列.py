@@ -33,52 +33,29 @@
 #     4 [1,2,3,3,0,0]
 #     5 [1,2,3,3,4,4]
 
-# class Solution:
-#     def lengthOfLIS(self, nums):
-#         n = len(nums)
-#         dp = [0] * n
-#         dp[0] = 1
-#         for i in range(1, n):
-#             t_max = 0
-#             for j in range(0, i):
-#                 print(i, j)
-#                 if nums[i] > nums[j]:
-#                     t_max = max(t_max, dp[j])
-#             dp[i] = t_max + 1
-#
-#         return dp[-1]
-
-# 贪心的方法
 class Solution:
     def lengthOfLIS(self, nums):
         n = len(nums)
-        res = []
-        # min_t = 9999999999
-        for q in range(n):
-            i = q
-            c = 1
-            while i < n:
-                min_t = 99999
-                t_i = 0
-                for j in range(i + 1, n):
-                    if nums[j] > nums[i] and nums[j] - nums[i] < min_t:
-                        min_t = nums[j] - nums[i]
-                        t_i = j
-                        print(j, i, nums[j], nums[i])
-                        # print(min_t,i,j)
+        dp = [0] * n
+        dp[0] = 1
+        for i in range(1, n):
+            t_max = 0
+            for j in range(0, i):
+                # print(i, j)
+                if nums[i] > nums[j]:
+                    t_max = max(t_max, dp[j])
+            dp[i] = t_max + 1
+        print(dp)
+        return dp[-1]
 
-                i = t_i
-                c += 1
-                if i == 0:
-                    break
-            res.append(c)
-            break
-        print(res)
-        return max(res)
         # c += 1
         # print(c)
 
 
+
 s = Solution()
-d = s.lengthOfLIS([0, 1, 0, 3, 2, 3])
-print(d)
+d = s.lengthOfLIS([1, 2, 4, 3, 5, 4, 7, 2])
+# print(d)
+# [0, 1, 0, 3, 2, 3]
+# [1, 2, 3, 3, 4, 4, 5, 2]
+# [1, 2, 3, 3, 4, 4, 5, 2]
