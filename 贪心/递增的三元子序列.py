@@ -33,7 +33,7 @@
 
 # [0,4,1,3]
 
-
+# first 最大， second 第二大。往后依次查找。
 class Solution:
     def increasingTriplet(self, nums):
         if len(nums) < 3:
