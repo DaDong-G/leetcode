@@ -22,7 +22,7 @@
 # 前缀和 + hash
 #   [1, 1, 1, 1, 2, 4, 4] , target = 2
 # [0,1, 2, 3, 4, 6, 10,14]
-# h = {4: 1, 6: 2, 10: 3, 14: 4} # hash 中村的值
+# h = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 6: 1, 10: 1, 14: 1}
 class Solution(object):
     def subarraySum(self, nums, k):
         """
@@ -31,24 +31,30 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
-        dp = [0] * (n + 1)
-        for i in range(n):
-            dp[i + 1] = dp[i] + nums[i]
-        print(dp)
+        # dp = [0] * (n + 1)
+        # for i in range(n):
+        #     dp[i + 1] = dp[i] + nums[i]
+        # print(dp)
         c = 0
-        h = {}
+        pre = 0
+        h = {0: 1}
         for i in range(n):
-            if dp[i + 1] == k:
-                h[k] = 1
-                c = 1
+            # print(dp[i + 1] - k)
+            pre += nums[i]
+            # print(pre, pre-k)
+            if pre - k in h:
+                c += h[pre - k]
 
-            elif dp[i + 1] - nums[i] in h:
-                h[dp[i + 1]] = h[dp[i + 1] - nums[i]] + 1
-                c = h[dp[i + 1]]
+            if pre in h:
+                h[pre] = h[pre] + 1
+            else:
+                h[pre] = 1
         return c
 
         # print(c)
 
+
 s = Solution()
-d = s.subarraySum([-1,-1,1], 1)
+d = s.subarraySum(
+    [1, 1, 1, 1, 2, 4, 4], 2)
 print(d)
