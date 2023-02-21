@@ -24,32 +24,25 @@
 from collections import Counter
 
 
+# 先统计出来 0 ， 1 ，2 出现的个数，然后根据索引，依次往里填入。
 class Solution(object):
     def sortColors(self, nums):
         """
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
+
         c = Counter(nums)
         i, j, k = c[0], c[1], c[2]
         for f in range(len(nums)):
-            if i > f >= 0:
+            if i > f:
                 nums[f] = 0
-            elif i + j > f >= i:
+            elif i + j > f:
                 nums[f] = 1
             else:
                 nums[f] = 2
 
 
 s = Solution()
-s.sortColors([2, 0, 2, 1, 1, 0])
+s.sortColors([2, 2, 2, 1, 1, 1, 1, 0])
 
-# for(let i = 0; i < nums.length; i++) {
-#         if(i >= 0 && i < a) {
-#             nums[i] = 0
-#         } else if(i < a+b) {
-#             nums[i] = 1
-#         } else if(i < a+b+c) {
-#             nums[i] = 2
-#         }
-#     }

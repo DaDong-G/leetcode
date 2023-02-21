@@ -19,11 +19,10 @@ class Solution(object):
             if s == size + 1:
                 return
             r.append(p)
-            print(p)
+            # print(p)
             for i in range(start, len(nums)):
                 if nums[i] in p:
                     continue
-
                 dfs(i, p + [nums[i]], s + 1, res)
 
         res = []

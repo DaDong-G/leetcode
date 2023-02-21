@@ -33,9 +33,9 @@ class Solution:
         def dfs(p,start,t):
             if t == target:
                 res.append(p)
-                print(res)
+                # print(res)
                 return
-
+            print(p)
             if t >target:
                 return
             # print(p)

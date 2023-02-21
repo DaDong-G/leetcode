@@ -40,7 +40,7 @@ class Solution:
             for i in range(start, n):
                 if used[i] == 1:
                     continue
-                if i > 0 and candidates[i] == candidates[i- 1] and used[i - 1] == 0:
+                if i > 0 and candidates[i] == candidates[i - 1] and used[i - 1] == 0:
                     continue
 
                 t += candidates[i]
