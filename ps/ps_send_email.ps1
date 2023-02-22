@@ -1,6 +1,4 @@
-﻿############################################################################################################################################################
-
-# MAKE LOOT FOLDER, FILE, and ZIP 
+﻿# MAKE LOOT FOLDER, FILE, and ZIP
 
 $FolderName = "$env:USERNAME-LOOT-$(get-date -f yyyy-MM-dd_hh-mm)"
 
