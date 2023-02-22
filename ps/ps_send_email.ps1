@@ -476,9 +476,6 @@ $SMTPClient.Send($SMTPMessage)
 send_email
 
 
-<#
-	This is to clean up behind you and remove any evidence to prove you were there
-#>
 
 # Delete contents of Temp folder 
 
